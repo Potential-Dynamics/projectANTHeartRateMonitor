@@ -2,4 +2,4 @@ This project contains a Python script designed to interface with an ANT+ heart r
 
 ### Acknowledgments
 
-This project utilizes the [openant](https://github.com/Tigge/openant) library for ANT+ communication. Special thanks to the contributors of openant for their work.
+This project utilizes the [openant](https://github.com/Tigge/openant) library for ANT+ communication.
