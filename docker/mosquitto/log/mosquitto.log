@@ -1,0 +1,166 @@
+1745893248: mosquitto version 2.0.21 starting
+1745893248: Config loaded from /mosquitto/config/mosquitto.conf.
+1745893248: Opening ipv4 listen socket on port 1883.
+1745893248: Opening ipv6 listen socket on port 1883.
+1745893248: mosquitto version 2.0.21 running
+1745893251: New connection from 172.18.0.1:48432 on port 1883.
+1745893251: New client connected from 172.18.0.1:48432 as mqttx_0e7228da (p5, c1, k60).
+1745893253: New connection from 172.18.0.1:48454 on port 1883.
+1745893253: New connection from 172.18.0.1:48446 on port 1883.
+1745893253: Client mqttx_0e7228da already connected, closing old connection.
+1745893253: New client connected from 172.18.0.1:48454 as mqttx_0e7228da (p5, c1, k60).
+1745893253: Client mqttx_0e7228da already connected, closing old connection.
+1745893253: New client connected from 172.18.0.1:48446 as mqttx_0e7228da (p5, c1, k60).
+1745893257: New connection from 172.18.0.1:48468 on port 1883.
+1745893257: New connection from 172.18.0.1:48478 on port 1883.
+1745893257: Client mqttx_0e7228da already connected, closing old connection.
+1745893257: New client connected from 172.18.0.1:48468 as mqttx_0e7228da (p5, c1, k60).
+1745893257: Client mqttx_0e7228da already connected, closing old connection.
+1745893257: New client connected from 172.18.0.1:48478 as mqttx_0e7228da (p5, c1, k60).
+1745893262: New connection from 172.18.0.1:37920 on port 1883.
+1745893262: Client mqttx_0e7228da already connected, closing old connection.
+1745893262: New client connected from 172.18.0.1:37920 as mqttx_0e7228da (p5, c1, k60).
+1745893262: New connection from 172.18.0.1:37936 on port 1883.
+1745893262: Client mqttx_0e7228da already connected, closing old connection.
+1745893262: New client connected from 172.18.0.1:37936 as mqttx_0e7228da (p5, c1, k60).
+1745893266: New connection from 172.18.0.1:37950 on port 1883.
+1745893266: Client mqttx_0e7228da already connected, closing old connection.
+1745893266: New client connected from 172.18.0.1:37950 as mqttx_0e7228da (p5, c1, k60).
+1745893266: New connection from 172.18.0.1:37966 on port 1883.
+1745893266: Client mqttx_0e7228da already connected, closing old connection.
+1745893266: New client connected from 172.18.0.1:37966 as mqttx_0e7228da (p5, c1, k60).
+1745893270: New connection from 172.18.0.1:47364 on port 1883.
+1745893270: Client mqttx_0e7228da already connected, closing old connection.
+1745893270: New client connected from 172.18.0.1:47364 as mqttx_0e7228da (p5, c1, k60).
+1745893270: New connection from 172.18.0.1:47380 on port 1883.
+1745893270: Client mqttx_0e7228da already connected, closing old connection.
+1745893270: New client connected from 172.18.0.1:47380 as mqttx_0e7228da (p5, c1, k60).
+1745893274: New connection from 172.18.0.1:47382 on port 1883.
+1745893274: Client mqttx_0e7228da already connected, closing old connection.
+1745893274: New client connected from 172.18.0.1:47382 as mqttx_0e7228da (p5, c1, k60).
+1745893274: New connection from 172.18.0.1:47390 on port 1883.
+1745893274: Client mqttx_0e7228da already connected, closing old connection.
+1745893274: New client connected from 172.18.0.1:47390 as mqttx_0e7228da (p5, c1, k60).
+1745893278: New connection from 172.18.0.1:47404 on port 1883.
+1745893278: Client mqttx_0e7228da already connected, closing old connection.
+1745893278: New client connected from 172.18.0.1:47404 as mqttx_0e7228da (p5, c1, k60).
+1745893278: New connection from 172.18.0.1:47416 on port 1883.
+1745893278: Client mqttx_0e7228da already connected, closing old connection.
+1745893278: New client connected from 172.18.0.1:47416 as mqttx_0e7228da (p5, c1, k60).
+1745893282: New connection from 172.18.0.1:43748 on port 1883.
+1745893282: New connection from 172.18.0.1:43738 on port 1883.
+1745893283: Client mqttx_0e7228da already connected, closing old connection.
+1745893283: New client connected from 172.18.0.1:43748 as mqttx_0e7228da (p5, c1, k60).
+1745893283: Client mqttx_0e7228da already connected, closing old connection.
+1745893283: New client connected from 172.18.0.1:43738 as mqttx_0e7228da (p5, c1, k60).
+1745893287: New connection from 172.18.0.1:43760 on port 1883.
+1745893287: Client mqttx_0e7228da already connected, closing old connection.
+1745893287: New client connected from 172.18.0.1:43760 as mqttx_0e7228da (p5, c1, k60).
+1745893287: New connection from 172.18.0.1:43766 on port 1883.
+1745893287: Client mqttx_0e7228da already connected, closing old connection.
+1745893287: New client connected from 172.18.0.1:43766 as mqttx_0e7228da (p5, c1, k60).
+1745893291: New connection from 172.18.0.1:53562 on port 1883.
+1745893291: Client mqttx_0e7228da already connected, closing old connection.
+1745893291: New client connected from 172.18.0.1:53562 as mqttx_0e7228da (p5, c1, k60).
+1745893291: New connection from 172.18.0.1:53572 on port 1883.
+1745893291: Client mqttx_0e7228da already connected, closing old connection.
+1745893291: New client connected from 172.18.0.1:53572 as mqttx_0e7228da (p5, c1, k60).
+1745893295: New connection from 172.18.0.1:53584 on port 1883.
+1745893295: Client mqttx_0e7228da already connected, closing old connection.
+1745893295: New client connected from 172.18.0.1:53584 as mqttx_0e7228da (p5, c1, k60).
+1745893295: New connection from 172.18.0.1:53594 on port 1883.
+1745893295: Client mqttx_0e7228da already connected, closing old connection.
+1745893295: New client connected from 172.18.0.1:53594 as mqttx_0e7228da (p5, c1, k60).
+1745893296: New connection from 172.18.0.1:53596 on port 1883.
+1745893296: Client mqttx_0e7228da already connected, closing old connection.
+1745893296: New client connected from 172.18.0.1:53596 as mqttx_0e7228da (p5, c1, k60).
+1745893299: Client mqttx_0e7228da closed its connection.
+1745893299: New connection from 172.18.0.1:53606 on port 1883.
+1745893299: New client connected from 172.18.0.1:53606 as mqttx_0e7228da (p5, c1, k60).
+1745893299: New connection from 172.18.0.1:53608 on port 1883.
+1745893299: Client mqttx_0e7228da already connected, closing old connection.
+1745893299: New client connected from 172.18.0.1:53608 as mqttx_0e7228da (p5, c1, k60).
+1745893300: New connection from 172.18.0.1:33770 on port 1883.
+1745893300: Client mqttx_0e7228da already connected, closing old connection.
+1745893300: New client connected from 172.18.0.1:33770 as mqttx_0e7228da (p5, c1, k60).
+1745893303: New connection from 172.18.0.1:33778 on port 1883.
+1745893303: Client mqttx_0e7228da already connected, closing old connection.
+1745893303: New client connected from 172.18.0.1:33778 as mqttx_0e7228da (p5, c1, k60).
+1745893304: New connection from 172.18.0.1:33792 on port 1883.
+1745893304: Client mqttx_0e7228da already connected, closing old connection.
+1745893304: New client connected from 172.18.0.1:33792 as mqttx_0e7228da (p5, c1, k60).
+1745893307: New connection from 172.18.0.1:33808 on port 1883.
+1745893307: Client mqttx_0e7228da already connected, closing old connection.
+1745893307: New client connected from 172.18.0.1:33808 as mqttx_0e7228da (p5, c1, k60).
+1745893308: New connection from 172.18.0.1:33824 on port 1883.
+1745893308: Client mqttx_0e7228da already connected, closing old connection.
+1745893308: New client connected from 172.18.0.1:33824 as mqttx_0e7228da (p5, c1, k60).
+1745893311: New connection from 172.18.0.1:52526 on port 1883.
+1745893311: Client mqttx_0e7228da already connected, closing old connection.
+1745893311: New client connected from 172.18.0.1:52526 as mqttx_0e7228da (p5, c1, k60).
+1745893312: New connection from 172.18.0.1:52534 on port 1883.
+1745893312: Client mqttx_0e7228da already connected, closing old connection.
+1745893312: New client connected from 172.18.0.1:52534 as mqttx_0e7228da (p5, c1, k60).
+1745893315: New connection from 172.18.0.1:52546 on port 1883.
+1745893315: Client mqttx_0e7228da already connected, closing old connection.
+1745893315: New client connected from 172.18.0.1:52546 as mqttx_0e7228da (p5, c1, k60).
+1745893316: New connection from 172.18.0.1:52560 on port 1883.
+1745893316: Client mqttx_0e7228da already connected, closing old connection.
+1745893316: New client connected from 172.18.0.1:52560 as mqttx_0e7228da (p5, c1, k60).
+1745893320: New connection from 172.18.0.1:52562 on port 1883.
+1745893320: Client mqttx_0e7228da already connected, closing old connection.
+1745893320: New client connected from 172.18.0.1:52562 as mqttx_0e7228da (p5, c1, k60).
+1745893320: New connection from 172.18.0.1:59456 on port 1883.
+1745893320: Client mqttx_0e7228da already connected, closing old connection.
+1745893320: New client connected from 172.18.0.1:59456 as mqttx_0e7228da (p5, c1, k60).
+1745893325: New connection from 172.18.0.1:59462 on port 1883.
+1745893325: Client mqttx_0e7228da already connected, closing old connection.
+1745893325: New client connected from 172.18.0.1:59462 as mqttx_0e7228da (p5, c1, k60).
+1745893325: New connection from 172.18.0.1:59478 on port 1883.
+1745893325: Client mqttx_0e7228da already connected, closing old connection.
+1745893325: New client connected from 172.18.0.1:59478 as mqttx_0e7228da (p5, c1, k60).
+1745893329: New connection from 172.18.0.1:59490 on port 1883.
+1745893329: Client mqttx_0e7228da already connected, closing old connection.
+1745893329: New client connected from 172.18.0.1:59490 as mqttx_0e7228da (p5, c1, k60).
+1745893330: New connection from 172.18.0.1:43512 on port 1883.
+1745893330: Client mqttx_0e7228da already connected, closing old connection.
+1745893330: New client connected from 172.18.0.1:43512 as mqttx_0e7228da (p5, c1, k60).
+1745893333: New connection from 172.18.0.1:43514 on port 1883.
+1745893333: Client mqttx_0e7228da already connected, closing old connection.
+1745893333: New client connected from 172.18.0.1:43514 as mqttx_0e7228da (p5, c1, k60).
+1745893334: New connection from 172.18.0.1:43516 on port 1883.
+1745893334: Client mqttx_0e7228da already connected, closing old connection.
+1745893334: New client connected from 172.18.0.1:43516 as mqttx_0e7228da (p5, c1, k60).
+1745893335: New connection from 172.18.0.1:43522 on port 1883.
+1745893335: New client connected from 172.18.0.1:43522 as try (p5, c1, k60).
+1745893337: New connection from 172.18.0.1:43524 on port 1883.
+1745893337: Client mqttx_0e7228da already connected, closing old connection.
+1745893337: New client connected from 172.18.0.1:43524 as mqttx_0e7228da (p5, c1, k60).
+1745893337: Client try closed its connection.
+1745893338: New connection from 172.18.0.1:43526 on port 1883.
+1745893338: Client mqttx_0e7228da already connected, closing old connection.
+1745893338: New client connected from 172.18.0.1:43526 as mqttx_0e7228da (p5, c1, k60).
+1745893341: New connection from 172.18.0.1:47796 on port 1883.
+1745893341: Client mqttx_0e7228da already connected, closing old connection.
+1745893341: New client connected from 172.18.0.1:47796 as mqttx_0e7228da (p5, c1, k60).
+1745893342: New connection from 172.18.0.1:47808 on port 1883.
+1745893342: Client mqttx_0e7228da already connected, closing old connection.
+1745893342: New client connected from 172.18.0.1:47808 as mqttx_0e7228da (p5, c1, k60).
+1745893346: New connection from 172.18.0.1:47812 on port 1883.
+1745893346: Client mqttx_0e7228da already connected, closing old connection.
+1745893346: New client connected from 172.18.0.1:47812 as mqttx_0e7228da (p5, c1, k60).
+1745893347: New connection from 172.18.0.1:47826 on port 1883.
+1745893347: Client mqttx_0e7228da already connected, closing old connection.
+1745893347: New client connected from 172.18.0.1:47826 as mqttx_0e7228da (p5, c1, k60).
+1745893351: New connection from 172.18.0.1:49604 on port 1883.
+1745893351: Client mqttx_0e7228da already connected, closing old connection.
+1745893351: New client connected from 172.18.0.1:49604 as mqttx_0e7228da (p5, c1, k60).
+1745893351: mosquitto version 2.0.21 terminating
+1745893351: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1745893390: mosquitto version 2.0.21 starting
+1745893390: Config loaded from /mosquitto/config/mosquitto.conf.
+1745893390: Opening ipv4 listen socket on port 1883.
+1745893390: Opening ipv6 listen socket on port 1883.
+1745893390: mosquitto version 2.0.21 running
+1745893417: New connection from 172.18.0.1:44038 on port 1883.
+1745893417: New client connected from 172.18.0.1:44038 as mqtt_001 (p5, c1, k60).
