@@ -4,4 +4,4 @@
 call .\myenv\Scripts\activate
 
 :: Run the Python script
-python3 src\heart_rate_mqtt_broker.py
+python src\heart_rate_mqtt_broker.py
