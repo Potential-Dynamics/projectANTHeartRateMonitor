@@ -4,15 +4,11 @@ from openant.devices.heart_rate import HeartRateData, HeartRate
 import time
 import paho.mqtt.client as mqtt
 
-# MQTT Configuration
+# MQTT Configuration, CHANGE if needed
 MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
 MQTT_TOPIC = "heart_rate/data"
 
-
-
-
-#def main(device_id_0=4755, device_id_1=19983):
 def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=26270, device_id_4= 33630, device_id_5=40571):
 
     try:
