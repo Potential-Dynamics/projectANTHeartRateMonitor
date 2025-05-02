@@ -21,6 +21,6 @@ To get started, you can either set up the environment manually by:
 
 1. install the required libraries listed in the **Environment** section,
 
-Note that the script is only tested with the specific versions of the libraries listed in the **Environment** section.
+Note that the script is only tested with the specific versions of the libraries listed in the **Environment** section. (**only for single ANT+ device**)
 
 2. use the pre-configured virtual environment provided by running ./run.bat.
