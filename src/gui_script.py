@@ -14,6 +14,10 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 current_process = None
 # Dictionary to store heart rate labels
 heart_rate_labels = {}
+# Lists to store UI references
+device_frames = []
+device_title_labels = []
+hr_labels = []
 
 def kill_script():
     global current_process
@@ -55,25 +59,45 @@ def parse_output_line(line):
         return device_id, heart_rate
     return None, None
 
+def update_device_labels(active_devices):
+    """Update the device labels to reflect the actual device IDs entered"""
+    global heart_rate_labels
+    
+    # Clear previous heart_rate_labels
+    heart_rate_labels = {}
+    
+    # Show only frames with entered device IDs
+    for i in range(9):
+        if i < len(active_devices) and active_devices[i]:
+            # Update title to show actual device ID
+            device_title_labels[i].config(text=f"Device ID: {active_devices[i]}")
+            # Map this device ID to its heart rate label
+            heart_rate_labels[active_devices[i]] = hr_labels[i]
+            # Make sure the frame is visible
+            device_frames[i].grid(row=(i // 3), column=(i % 3), padx=10, pady=5, sticky="ew")
+        else:
+            # Hide unused frames
+            device_frames[i].grid_forget()
+
 def run_script():
     global current_process
     
-    # Get inputs from Entry widgets
-    device_ids = [entry.get() for entry in entries]
-    if not all(id_.isdigit() for id_ in device_ids):
+    # Get inputs from Entry widgets and filter out empty entries
+    device_ids = [entry.get().strip() for entry in entries]
+    active_devices = [id_ for id_ in device_ids if id_]
+    
+    if not all(id_.isdigit() for id_ in active_devices):
         output_box.insert(tk.END, "Please enter only numeric device IDs.\n")
         return
     
-    # Reset heart rate displays
-    for device_id in device_ids:
-        if device_id in heart_rate_labels:
-            heart_rate_labels[device_id].config(text="Heart Rate: -- BPM", fg="black")
+    # Update the device labels
+    update_device_labels(active_devices)
     
     # Use absolute paths with os.path
     python_path = os.path.join(project_root, "myenv", "Scripts", "python.exe")
     script_path = os.path.join(project_root, "src", "heart_rate_mqtt_broker.py")
     
-    command = [python_path, script_path] + device_ids
+    command = [python_path, script_path] + active_devices
     
     output_box.insert(tk.END, f"Running command: {' '.join(command)}\n")
     output_box.insert(tk.END, f"Working directory: {project_root}\n")
@@ -149,11 +173,20 @@ for i in range(9):
     col = i % 3
     device_frame = tk.Frame(hr_frame, bd=2, relief=tk.GROOVE, padx=5, pady=5)
     device_frame.grid(row=row, column=col, padx=10, pady=5, sticky="ew")
+    device_frames.append(device_frame)
     
-    device_id = str(i+1)
-    tk.Label(device_frame, text=f"Device {device_id}").pack()
+    # Create and store title label
+    title_label = tk.Label(device_frame, text=f"Device {i+1}")
+    title_label.pack()
+    device_title_labels.append(title_label)
+    
+    # Create and store heart rate label
     hr_label = tk.Label(device_frame, text="Heart Rate: -- BPM", font=("Arial", 10, "bold"))
     hr_label.pack(pady=3)
+    hr_labels.append(hr_label)
+    
+    # Initially map using default IDs (will be updated when Start is clicked)
+    device_id = str(i+1)
     heart_rate_labels[device_id] = hr_label
 
 # Button frame
