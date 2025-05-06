@@ -24,3 +24,7 @@ To get started, you can either set up the environment manually by:
 Note that the script is only tested with the specific versions of the libraries listed in the **Environment** section. (**only for single ANT+ device**)
 
 2. use the pre-configured virtual environment provided by running ./run.bat.
+
+
+3. Refer to [Multi-Dongle ANT+ Heart Rate Monitor Receiver Application Deployment Guide](doc/Multi-Dongle%20ANT+%20Heart%20Rate%20Monitor%20Receiver%20Application%20Deployment%20Guide.docx) for detailed deployment guide
+
