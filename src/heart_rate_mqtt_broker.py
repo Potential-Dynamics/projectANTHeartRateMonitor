@@ -8,6 +8,8 @@ import paho.mqtt.client as mqtt
 import logging
 import importlib
 import threading
+import argparse
+import sys
 
 # Uncomment the following lines to enable debug logging for openant
 
@@ -23,6 +25,7 @@ import threading
 # openant_logger = logging.getLogger('openant')
 # openant_logger.setLevel(logging.INFO)  # Set to DEBUG, INFO, WARNING, ERROR as needed
 
+sys.stdout.reconfigure(line_buffering=True) 
 
 # MQTT Configuration, CHANGE if needed
 MQTT_BROKER = "localhost"
@@ -31,15 +34,15 @@ MQTT_TOPIC = "heart_rate/data"
 
 def run_node(node, node_name):
     try:
-        print(f"Starting {node_name}...")
+        print(f"Start {node_name}...")
         node.start()
-        print(f"{node_name} started successfully")
     except Exception as e:
         print(f"Error in {node_name}: {e}")
 
 
 #def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=26270, device_id_4= 33630, device_id_5=40571, device_id_6=16245):
-def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4=5, device_id_5=6, device_id_6=7, device_id_7=8, device_id_8=9):
+#def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4=5, device_id_5=6, device_id_6=7, device_id_7=8, device_id_8=9):
+def main(device_ids): 
     try:
         mqtt_client = mqtt.Client()
         mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
@@ -64,15 +67,17 @@ def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4
         time.sleep(5)
         return
 
-    device0 = HeartRate(node1, device_id=device_id_0)
-    device1 = HeartRate(node1, device_id=device_id_1)
-    device2 = HeartRate(node1, device_id=device_id_2)
-    device3 = HeartRate(node1, device_id=device_id_3)
-    device4 = HeartRate(node1, device_id=device_id_4)
-    device5 = HeartRate(node0, device_id=device_id_5)
-    device6 = HeartRate(node0, device_id=device_id_6)
-    device7 = HeartRate(node0, device_id=device_id_7)
-    device8 = HeartRate(node0, device_id=device_id_8)
+    devices = [
+    HeartRate(node1, device_id=device_ids[0]),
+    HeartRate(node1, device_id=device_ids[1]),
+    HeartRate(node1, device_id=device_ids[2]),
+    HeartRate(node1, device_id=device_ids[3]),
+    HeartRate(node1, device_id=device_ids[4]),
+    HeartRate(node0, device_id=device_ids[5]),
+    HeartRate(node0, device_id=device_ids[6]),
+    HeartRate(node0, device_id=device_ids[7]),
+    HeartRate(node0, device_id=device_ids[8])
+    ]
 
     def create_callback(device_id, node_serial_number):
         def on_device_data(page: int, page_name: str, data):
@@ -93,15 +98,19 @@ def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4
         return on_device_data
 
     # Bind the device_id to the callback
-    device0.on_device_data = create_callback(device_id_0, node1.serial)
-    device1.on_device_data = create_callback(device_id_1, node0.serial)
-    device2.on_device_data = create_callback(device_id_2, node0.serial)
-    device3.on_device_data = create_callback(device_id_3, node0.serial)
-    device4.on_device_data = create_callback(device_id_4, node0.serial)
-    device5.on_device_data = create_callback(device_id_5, node0.serial)
-    device6.on_device_data = create_callback(device_id_6, node0.serial)
-    device7.on_device_data = create_callback(device_id_7, node0.serial)
-    device8.on_device_data = create_callback(device_id_8, node0.serial)
+    # device0.on_device_data = create_callback(device_id_0, node1.serial)
+    # device1.on_device_data = create_callback(device_id_1, node0.serial)
+    # device2.on_device_data = create_callback(device_id_2, node0.serial)
+    # device3.on_device_data = create_callback(device_id_3, node0.serial)
+    # device4.on_device_data = create_callback(device_id_4, node0.serial)
+    # device5.on_device_data = create_callback(device_id_5, node0.serial)
+    # device6.on_device_data = create_callback(device_id_6, node0.serial)
+    # device7.on_device_data = create_callback(device_id_7, node0.serial)
+    # device8.on_device_data = create_callback(device_id_8, node0.serial)
+
+    for i, device in enumerate(devices):
+        device.on_device_data = create_callback(device_ids[i], node1.serial if i < 5 else node0.serial)
+
 
     node0_thread = threading.Thread(target=run_node, args=(node0, "node0"))
     node1_thread = threading.Thread(target=run_node, args=(node1, "node1"))
@@ -122,5 +131,11 @@ def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4
         node1.stop()
 
 
+# if __name__ == "__main__":
+#     main()
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Start ANT+ Heart Rate Monitor with MQTT.")
+    parser.add_argument("device_ids", metavar="ID", type=int, nargs=9,
+                        help="Nine device IDs in order (device_id_0 to device_id_8)")
+    args = parser.parse_args()
+    main(args.device_ids)

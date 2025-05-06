@@ -1,7 +1,12 @@
-@echo off
+@echo on
+REM Display current directory
+echo Current directory: %CD%
 
-:: Activate the virtual environment
-call .\myenv\Scripts\activate
+REM Activate with full path (adjust as needed)
+call "%CD%\myenv\Scripts\activate"
 
-:: Run the Python script
-python src\heart_rate_mqtt_broker.py
+REM Verify python location
+where python
+
+REM Run script with full path
+"%CD%\myenv\Scripts\python.exe" "src\gui_script.py" 
