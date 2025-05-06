@@ -1,2 +1,3 @@
 log/
 openant_debug.log
+docker/mosquitto/data

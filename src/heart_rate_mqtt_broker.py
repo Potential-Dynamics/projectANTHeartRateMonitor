@@ -9,6 +9,8 @@ import logging
 import importlib
 import threading
 
+# Uncomment the following lines to enable debug logging for openant
+
 # logging.basicConfig(
 #     level=logging.INFO,  # Set to DEBUG to see all logs
 #     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -36,8 +38,8 @@ def run_node(node, node_name):
         print(f"Error in {node_name}: {e}")
 
 
-def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=26270, device_id_4= 33630, device_id_5=40571, device_id_6=16245):
-
+#def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=26270, device_id_4= 33630, device_id_5=40571, device_id_6=16245):
+def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4=5, device_id_5=6, device_id_6=7, device_id_7=8, device_id_8=9):
     try:
         mqtt_client = mqtt.Client()
         mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
@@ -63,12 +65,14 @@ def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=262
         return
 
     device0 = HeartRate(node1, device_id=device_id_0)
-    device1 = HeartRate(node0, device_id=device_id_1)
-    device2 = HeartRate(node0, device_id=device_id_2)
-    device3 = HeartRate(node0, device_id=device_id_3)
-    device4 = HeartRate(node0, device_id=device_id_4)
+    device1 = HeartRate(node1, device_id=device_id_1)
+    device2 = HeartRate(node1, device_id=device_id_2)
+    device3 = HeartRate(node1, device_id=device_id_3)
+    device4 = HeartRate(node1, device_id=device_id_4)
     device5 = HeartRate(node0, device_id=device_id_5)
     device6 = HeartRate(node0, device_id=device_id_6)
+    device7 = HeartRate(node0, device_id=device_id_7)
+    device8 = HeartRate(node0, device_id=device_id_8)
 
     def create_callback(device_id, node_serial_number):
         def on_device_data(page: int, page_name: str, data):
@@ -96,6 +100,8 @@ def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=262
     device4.on_device_data = create_callback(device_id_4, node0.serial)
     device5.on_device_data = create_callback(device_id_5, node0.serial)
     device6.on_device_data = create_callback(device_id_6, node0.serial)
+    device7.on_device_data = create_callback(device_id_7, node0.serial)
+    device8.on_device_data = create_callback(device_id_8, node0.serial)
 
     node0_thread = threading.Thread(target=run_node, args=(node0, "node0"))
     node1_thread = threading.Thread(target=run_node, args=(node1, "node1"))
