@@ -5,12 +5,15 @@ import threading
 import os
 import sys
 import signal
+import re
 
 # Get the project root directory
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 # Global variable to track the current process
 current_process = None
+# Dictionary to store heart rate labels
+heart_rate_labels = {}
 
 def kill_script():
     global current_process
@@ -29,6 +32,29 @@ def kill_script():
         output_box.insert(tk.END, "Stop signal sent.\n")
         output_box.see(tk.END)
 
+def update_heart_rate(device_id, heart_rate):
+    """Update the heart rate display for a specific device"""
+    if device_id in heart_rate_labels:
+        heart_rate_labels[device_id].config(text=f"Heart Rate: {heart_rate} BPM")
+        # Change color based on heart rate value
+        if heart_rate > 160:
+            heart_rate_labels[device_id].config(fg="red")
+        elif heart_rate > 120:
+            heart_rate_labels[device_id].config(fg="orange")
+        else:
+            heart_rate_labels[device_id].config(fg="green")
+
+def parse_output_line(line):
+    """Parse heart rate updates from output lines"""
+    # Pattern: "Device ID X: Heart rate update Y"
+    pattern = r"Device ID (\d+): Heart rate update (\d+)"
+    match = re.search(pattern, line)
+    if match:
+        device_id = match.group(1)
+        heart_rate = int(match.group(2))
+        return device_id, heart_rate
+    return None, None
+
 def run_script():
     global current_process
     
@@ -37,6 +63,11 @@ def run_script():
     if not all(id_.isdigit() for id_ in device_ids):
         output_box.insert(tk.END, "Please enter only numeric device IDs.\n")
         return
+    
+    # Reset heart rate displays
+    for device_id in device_ids:
+        if device_id in heart_rate_labels:
+            heart_rate_labels[device_id].config(text="Heart Rate: -- BPM", fg="black")
     
     # Use absolute paths with os.path
     python_path = os.path.join(project_root, "myenv", "Scripts", "python.exe")
@@ -52,11 +83,11 @@ def run_script():
         process = subprocess.Popen(
             command,
             stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,  # Redirect stderr to stdout
+            stderr=subprocess.STDOUT,
             text=True,
-            bufsize=0,  # No buffering for immediate output
-            cwd=project_root,  # Set working directory explicitly
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0  # For Windows CTRL+C handling
+            bufsize=0,
+            cwd=project_root,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0
         )
         
         current_process = process
@@ -64,9 +95,16 @@ def run_script():
         # Function to read from stdout and write to output_box
         for line in iter(process.stdout.readline, ''):
             if line:
+                # Update heart rate display if this is a heart rate update
+                device_id, heart_rate = parse_output_line(line)
+                if device_id and heart_rate:
+                    # Update the corresponding heart rate display
+                    root.after(0, update_heart_rate, device_id, heart_rate)
+                
+                # Still log everything to the output box
                 output_box.insert(tk.END, line)
                 output_box.see(tk.END)
-                root.update()  # Full GUI update
+                root.update()
         
         # Wait for process to complete
         exit_code = process.wait()
@@ -97,9 +135,26 @@ for i in range(9):
     tk.Label(frame_entry, text=f"Device {i+1}:").pack(anchor='w')
     entry = tk.Entry(frame_entry, width=10)
     entry.pack()
-    # Add default values (can be removed if not needed)
+    # Add default values
     entry.insert(0, str(i+1))
     entries.append(entry)
+
+# Heart rate display frame
+hr_frame = tk.Frame(root)
+hr_frame.pack(pady=10, fill=tk.X)
+
+# Create heart rate display widgets (3x3 grid)
+for i in range(9):
+    row = (i // 3)
+    col = i % 3
+    device_frame = tk.Frame(hr_frame, bd=2, relief=tk.GROOVE, padx=5, pady=5)
+    device_frame.grid(row=row, column=col, padx=10, pady=5, sticky="ew")
+    
+    device_id = str(i+1)
+    tk.Label(device_frame, text=f"Device {device_id}").pack()
+    hr_label = tk.Label(device_frame, text="Heart Rate: -- BPM", font=("Arial", 10, "bold"))
+    hr_label.pack(pady=3)
+    heart_rate_labels[device_id] = hr_label
 
 # Button frame
 button_frame = tk.Frame(root)
@@ -119,7 +174,7 @@ output_box.insert(tk.END, "Enter device IDs and click 'Start Monitoring'.\n")
 output_box.insert(tk.END, "Default IDs are pre-filled (1-9).\n\n")
 
 # Make window resizable
-root.geometry("800x600")
-root.minsize(600, 400)
+root.geometry("800x700")
+root.minsize(600, 500)
 
 root.mainloop()
