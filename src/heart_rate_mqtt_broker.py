@@ -40,8 +40,6 @@ def run_node(node, node_name):
         print(f"Error in {node_name}: {e}")
 
 
-#def main(device_id_0=4755, device_id_1=19983, device_id_2=62618, device_id_3=26270, device_id_4= 33630, device_id_5=40571, device_id_6=16245):
-#def main(device_id_0=1, device_id_1=2, device_id_2=3, device_id_3=4, device_id_4=5, device_id_5=6, device_id_6=7, device_id_7=8, device_id_8=9):
 def main(device_ids): 
     try:
         mqtt_client = mqtt.Client()
@@ -59,6 +57,12 @@ def main(device_ids):
 
         node1 = Node()
         node1.set_network_key(0x00, ANTPLUS_NETWORK_KEY)
+
+        node2 = Node()
+        node2.set_network_key(0x00, ANTPLUS_NETWORK_KEY)
+
+        node3 = Node()
+        node3.set_network_key(0x00, ANTPLUS_NETWORK_KEY)
     except Exception as e:
         # traceback.print_exc()
         print(f"Failed to initialize ANT+ node: {e}")
@@ -67,17 +71,12 @@ def main(device_ids):
         time.sleep(5)
         return
 
-    devices = [
-    HeartRate(node1, device_id=device_ids[0]),
-    HeartRate(node1, device_id=device_ids[1]),
-    HeartRate(node1, device_id=device_ids[2]),
-    HeartRate(node1, device_id=device_ids[3]),
-    HeartRate(node1, device_id=device_ids[4]),
-    HeartRate(node0, device_id=device_ids[5]),
-    HeartRate(node0, device_id=device_ids[6]),
-    HeartRate(node0, device_id=device_ids[7]),
-    HeartRate(node0, device_id=device_ids[8])
-    ]
+    devices = []
+    nodes = [node0, node1, node2, node3]
+    for i, node in enumerate(nodes):
+        for j in range(8):  # Each node handles 8 devices
+            device_index = i * 8 + j
+            devices.append(HeartRate(node, device_id=device_ids[device_index]))
 
     def create_callback(device_id, node_serial_number):
         def on_device_data(page: int, page_name: str, data):
@@ -97,28 +96,22 @@ def main(device_ids):
                     mqtt_client.publish(MQTT_TOPIC, str(payload))
         return on_device_data
 
-    # Bind the device_id to the callback
-    # device0.on_device_data = create_callback(device_id_0, node1.serial)
-    # device1.on_device_data = create_callback(device_id_1, node0.serial)
-    # device2.on_device_data = create_callback(device_id_2, node0.serial)
-    # device3.on_device_data = create_callback(device_id_3, node0.serial)
-    # device4.on_device_data = create_callback(device_id_4, node0.serial)
-    # device5.on_device_data = create_callback(device_id_5, node0.serial)
-    # device6.on_device_data = create_callback(device_id_6, node0.serial)
-    # device7.on_device_data = create_callback(device_id_7, node0.serial)
-    # device8.on_device_data = create_callback(device_id_8, node0.serial)
-
     for i, device in enumerate(devices):
-        device.on_device_data = create_callback(device_ids[i], node1.serial if i < 5 else node0.serial)
+        node_serial_number = nodes[i // 8].serial  # Determine the node based on the device index
+        device.on_device_data = create_callback(device_ids[i], node_serial_number)
 
 
     node0_thread = threading.Thread(target=run_node, args=(node0, "node0"))
     node1_thread = threading.Thread(target=run_node, args=(node1, "node1"))
+    node2_thread = threading.Thread(target=run_node, args=(node2, "node2"))
+    node3_thread = threading.Thread(target=run_node, args=(node3, "node3"))
 
 
     try:
         node0_thread.start()
         node1_thread.start()
+        node2_thread.start()
+        node3_thread.start()
 
         while True:
             time.sleep(1)
@@ -129,13 +122,13 @@ def main(device_ids):
         # device.close_channel()
         node0.stop()
         node1.stop()
+        node2.stop()
+        node3.stop()
 
 
-# if __name__ == "__main__":
-#     main()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Start ANT+ Heart Rate Monitor with MQTT.")
-    parser.add_argument("device_ids", metavar="ID", type=int, nargs=9,
-                        help="Nine device IDs in order (device_id_0 to device_id_8)")
+    parser.add_argument("device_ids", metavar="ID", type=int, nargs=32,
+                        help="Nine device IDs in order (device_id_0 to device_id_31)")
     args = parser.parse_args()
     main(args.device_ids)

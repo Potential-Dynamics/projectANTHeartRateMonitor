@@ -67,14 +67,14 @@ def update_device_labels(active_devices):
     heart_rate_labels = {}
     
     # Show only frames with entered device IDs
-    for i in range(9):
+    for i in range(32):
         if i < len(active_devices) and active_devices[i]:
             # Update title to show actual device ID
             device_title_labels[i].config(text=f"Device ID: {active_devices[i]}")
             # Map this device ID to its heart rate label
             heart_rate_labels[active_devices[i]] = hr_labels[i]
             # Make sure the frame is visible
-            device_frames[i].grid(row=(i // 3), column=(i % 3), padx=10, pady=5, sticky="ew")
+            device_frames[i].grid(row=(i // 8), column=(i % 8), padx=5, pady=3, sticky="ew")
         else:
             # Hide unused frames
             device_frames[i].grid_forget()
@@ -146,18 +146,18 @@ root.title("ANT+ Heart Rate Monitor")
 frame = tk.Frame(root)
 frame.pack(pady=10)
 
-tk.Label(frame, text="Enter Device IDs:").grid(row=0, column=0, columnspan=3)
+tk.Label(frame, text="Enter Device IDs:").grid(row=0, column=0, columnspan=8)
 
 entries = []
-# Create a grid of entry widgets (3x3)
-for i in range(9):
-    row = (i // 3) + 1
-    col = i % 3
+# Create a grid of entry widgets (4x8 for 32 devices)
+for i in range(32):
+    row = (i // 8) + 1
+    col = i % 8
     frame_entry = tk.Frame(frame)
-    frame_entry.grid(row=row, column=col, padx=5, pady=5)
+    frame_entry.grid(row=row, column=col, padx=3, pady=3)
     
-    tk.Label(frame_entry, text=f"Device {i+1}:").pack(anchor='w')
-    entry = tk.Entry(frame_entry, width=10)
+    tk.Label(frame_entry, text=f"Device {i+1}:", font=("Arial", 8)).pack(anchor='w')
+    entry = tk.Entry(frame_entry, width=8)
     entry.pack()
     # Add default values
     entry.insert(0, str(i+1))
@@ -167,22 +167,22 @@ for i in range(9):
 hr_frame = tk.Frame(root)
 hr_frame.pack(pady=10, fill=tk.X)
 
-# Create heart rate display widgets (3x3 grid)
-for i in range(9):
-    row = (i // 3)
-    col = i % 3
-    device_frame = tk.Frame(hr_frame, bd=2, relief=tk.GROOVE, padx=5, pady=5)
-    device_frame.grid(row=row, column=col, padx=10, pady=5, sticky="ew")
+# Create heart rate display widgets (4x8 grid for 32 devices)
+for i in range(32):
+    row = (i // 8)
+    col = i % 8
+    device_frame = tk.Frame(hr_frame, bd=2, relief=tk.GROOVE, padx=3, pady=3)
+    device_frame.grid(row=row, column=col, padx=5, pady=3, sticky="ew")
     device_frames.append(device_frame)
     
     # Create and store title label
-    title_label = tk.Label(device_frame, text=f"Device {i+1}")
+    title_label = tk.Label(device_frame, text=f"Device {i+1}", font=("Arial", 8))
     title_label.pack()
     device_title_labels.append(title_label)
     
     # Create and store heart rate label
-    hr_label = tk.Label(device_frame, text="Heart Rate: -- BPM", font=("Arial", 10, "bold"))
-    hr_label.pack(pady=3)
+    hr_label = tk.Label(device_frame, text="Heart Rate: -- BPM", font=("Arial", 8, "bold"))
+    hr_label.pack(pady=2)
     hr_labels.append(hr_label)
     
     # Initially map using default IDs (will be updated when Start is clicked)
@@ -204,10 +204,10 @@ output_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
 # Initial instructions
 output_box.insert(tk.END, "Enter device IDs and click 'Start Monitoring'.\n")
-output_box.insert(tk.END, "Default IDs are pre-filled (1-9).\n\n")
+output_box.insert(tk.END, "Default IDs are pre-filled (1-32).\n\n")
 
 # Make window resizable
-root.geometry("800x700")
-root.minsize(600, 500)
+root.geometry("1200x800")  # Larger initial size to fit all devices
+root.minsize(800, 600)
 
 root.mainloop()
